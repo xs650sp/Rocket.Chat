@@ -168,3 +168,13 @@ Meteor.publish 'roomSearch', (selector, options, collName) ->
 	self.onStop ->
 		subHandleUsers?.stop()
 		subHandleRooms?.stop()
+
+Meteor.publish 'notifications', (ts) ->
+	unless this.userId
+		return this.ready()
+
+	query = { uid: this.userId, ts: { $gt: ts } }
+
+	console.log query
+
+	return ChatNotification.find query

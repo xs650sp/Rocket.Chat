@@ -14,3 +14,5 @@
 		return room
 
 @ChatSubscription = new Meteor.Collection 'data.ChatSubscription'
+
+@ChatNotification = new Meteor.Collection 'data.ChatNotification'

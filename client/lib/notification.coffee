@@ -8,24 +8,26 @@
 					Notification.permission = status
 
 	# notificacoes HTML5
-	showDesktop: (room, msg) ->
+	newMessage: (room, msg) ->
 		unless Session.equals('user_' + Meteor.userId() + '_status', 'busy')
-			roomName = room.name + ' - Rocket.Chat'
+			$('#chatAudioNotification')[0].play()
+			roomName = room + ' - Rocket.Chat'
 			if window.Notification && Notification.permission == "granted"
 				n = new Notification roomName,
-					icon: '/images/rocket-chat-logo-square.png'
+					icon: '/images/logo/64x64.png'
 					body: _.stripTags(msg)
 
 				n.onclick = ->
-					$('#chat-window-' + room._id + '.chat-window .chat-title').click()
+					console.log 'notification clicked'
+					# $('#chat-window-' + room._id + '.chat-window .chat-title').click()
 
 				setTimeout ->
 					n.close()
 				, 2000
 
-	newMessage: ->
-		unless Session.equals('user_' + Meteor.userId() + '_status', 'busy')
-			$('#chatAudioNotification')[0].play()
+	# newMessage: ->
+	# 	unless Session.equals('user_' + Meteor.userId() + '_status', 'busy')
+	# 		$('#chatAudioNotification')[0].play()
 
 	newRoom: (rid, withSound = true) ->
 		Tracker.nonreactive ->
