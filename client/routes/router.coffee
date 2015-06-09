@@ -77,12 +77,15 @@ Router.route '/room/:_id',
 		Session.set 'openedRoom', @params._id
 		Meteor.call 'readMessages', @params._id
 		KonchatNotification.removeRoomNotification @params._id
+		$(".room-container").removeClass "visible"
 		this.next()
 
 	action: ->
 		this.render 'empty'
 
 	onAfterAction: ->
+
+		$("#room-container-#{@params._id}").addClass "visible"
 		setTimeout ->
 			$('.message-form .input-message').focus()
 		, 100
