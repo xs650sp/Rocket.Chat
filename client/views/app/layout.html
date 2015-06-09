@@ -5,6 +5,9 @@
 			{{> status}}
 		</div>
 		<main class="main-content cf_ {{flexOpened}}">
+			{{#each rooms}}
+				{{> chatWindowDashboard}}
+			{{/each}}
 			{{> yield}}
 		</main>
 		{{> sideNav }}

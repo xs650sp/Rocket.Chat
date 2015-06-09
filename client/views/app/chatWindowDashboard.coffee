@@ -1,6 +1,10 @@
 # @TODO bug com o botão para "rolar até o fim" (novas mensagens) quando há uma mensagem com texto que gere rolagem horizontal
 Template.chatWindowDashboard.helpers
 
+	visible: ->
+		console.log 'chatWindowDashboard.visible' if window.rocketDebug
+		return 'visible' if this._id is Session.get('openedRoom')
+
 	tAddUsers: ->
 		return t('chatWindowDashboard.Add_users')
 
@@ -32,6 +36,10 @@ Template.chatWindowDashboard.helpers
 	windowId: ->
 		console.log 'chatWindowDashboard.windowId' if window.rocketDebug
 		return "chat-window-#{this._id}"
+
+	roomContainerId: ->
+		console.log 'chatWindowDashboard.roomContainerId' if window.rocketDebug
+		return "room-container-#{this._id}"
 
 	showTyping: ->
 		console.log 'chatWindowDashboard.showTyping' if window.rocketDebug
