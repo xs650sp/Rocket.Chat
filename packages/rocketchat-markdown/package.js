@@ -1,7 +1,7 @@
 Package.describe({
-	name: 'rocketchat:mentions',
+	name: 'rocketchat:markdown',
 	version: '0.0.1',
-	summary: 'Message pre-processor that will process mentions',
+	summary: 'Message pre-processor that will process selected markdown notations',
 	git: ''
 });
 
@@ -13,8 +13,7 @@ Package.onUse(function(api) {
 		'rocketchat:lib@0.0.1'
 	]);
 
-	api.addFiles('client.coffee', 'client');
-	api.addFiles('server.coffee', 'server');
+	api.addFiles('markdown.coffee', ['server','client']);
 });
 
 Package.onTest(function(api) {
