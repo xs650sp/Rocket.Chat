@@ -25,7 +25,7 @@
 				{{#if isEditing}}
 					<div class="input-message-editing-container">
 						{{> messagePopupConfig getPupupConfig}}
-						<textarea class="input-message-editing">{{msg}}</textarea>
+						<textarea class="input-message-editing" dir="auto">{{msg}}</textarea>
 					</div>
 				{{else}}
 					{{#if ../single}}
@@ -41,8 +41,13 @@
 						{{/if}}
 					</span>
 					{{/if}}
-					<div>
+					<div dir="auto">
 						{{{renderMessage}}}
+						{{#if urls}}
+							{{#each urls}}
+								{{> oembed url=this}}
+							{{/each}}
+						{{/if}}
 					</div>
 				{{/if}}
 			{{/if}}
