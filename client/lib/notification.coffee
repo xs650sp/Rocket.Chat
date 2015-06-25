@@ -26,6 +26,10 @@
 	newMessage: ->
 		unless Session.equals('user_' + Meteor.userId() + '_status', 'busy')
 			$('#chatAudioNotification')[0].play()
+	
+	notifyWindow: (csid) ->
+        cs = ChatSubscription.findOne csid
+        $.fn.notifyWindow(cs.name, cs.rid)
 
 	newRoom: (rid, withSound = true) ->
 		Tracker.nonreactive ->

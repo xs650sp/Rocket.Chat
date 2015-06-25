@@ -13,8 +13,14 @@ class MentionsServer
 			mentions = _.unique mentions
 			verifiedMentions = []
 			mentions.forEach (mention) ->
-				verifiedMention = Meteor.users.findOne({username: mention}, {fields: {_id: 1, username: 1}})
-				verifiedMentions.push verifiedMention if verifiedMention?
+				if mention is "all"
+					room = ChatRoom.findOne message.rid, { fields: { usernames: 1} }
+					for username in room.usernames
+						u = Meteor.users.findOne({username: username}, {fields: {_id: 1, username: 1}})
+						verifiedMentions.push u
+				else
+					verifiedMention = Meteor.users.findOne({username: mention}, {fields: {_id: 1, username: 1}})
+					verifiedMentions.push verifiedMention if verifiedMention?
 			if verifiedMentions.length isnt 0
 				message.mentions = verifiedMentions
 		return message

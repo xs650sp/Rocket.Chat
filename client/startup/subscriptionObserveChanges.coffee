@@ -3,3 +3,4 @@ Meteor.startup ->
 		changed: (id, fields) ->
 			if fields.unread and fields.unread > 0
 				KonchatNotification.newMessage()
+				KonchatNotification.notifyWindow(id)

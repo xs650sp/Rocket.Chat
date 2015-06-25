@@ -38,7 +38,6 @@ Meteor.methods
 				$inc:
 					msgs: 1
 
-
 			# increment unread couter if direct messages
 			if room.t is 'd'
 				###
@@ -62,25 +61,25 @@ Meteor.methods
 
 			else
 				message.mentions?.forEach (mention) ->
-					console.log mention
 					###
 					Update all other subscriptions of mentioned users to alert their owners and incrementing
 					the unread counter for mentions and direct messages
 					###
-					ChatSubscription.update
-						# only subscriptions to the same room
-						rid: message.rid
-						# the mentioned user
-						'u._id': mention._id
-					,
-						$set:
-							# alert de user
-							alert: true
-							# open the room for the user
-							open: true
-						# increment unread couter
-						$inc:
-							unread: 1
+					if mention._id isnt message.u._id
+						ChatSubscription.update
+							# only subscriptions to the same room
+							rid: message.rid
+							# the mentioned user
+							'u._id': mention._id
+						,
+							$set:
+								# alert de user
+								alert: true
+								# open the room for the user
+								open: true
+							# increment unread couter
+							$inc:
+								unread: 1
 
 			###
 			Update all other subscriptions to alert their owners but witout incrementing
